@@ -18,6 +18,9 @@ const typeDefs = gql`
     getUsers: [User]
     getPosts: [Post]
   }
+  type Mutation{
+    
+  }
 `;
 
 module.exports = typeDefs;
