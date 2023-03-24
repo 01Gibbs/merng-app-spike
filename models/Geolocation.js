@@ -10,7 +10,10 @@ const geolocationSchema = new Schema({
     },
   ],
   description: String,
-  user_id: ID,
+  user_id: {
+    type: Schema.Types.ObjectId,
+    ref: "User",
+  },
   created_at: Timestamp,
   updated_at: Timestamp,
 });

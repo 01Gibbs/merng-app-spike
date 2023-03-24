@@ -2,17 +2,32 @@ const { ApolloServer } = require("apollo-server");
 const gql = require("graphql-tag");
 const mongoose = require("mongoose");
 
+const User = require("./models/User");
 const { MONGODB } = require("./config.js");
 
 const typeDefs = gql`
+  type User {
+    id: ID!
+    username: String!
+    password: String!
+    email: String!
+  }
+
   type Query {
-    sayHi: String!
+    getUsers: [User]
   }
 `;
 
 const resolvers = {
   Query: {
-    sayHi: () => "Hello World",
+    async getUsers() {
+      try {
+        const users = await User.find();
+        return users;
+      } catch (err) {
+        throw new Error(err);
+      }
+    },
   },
 };
 
